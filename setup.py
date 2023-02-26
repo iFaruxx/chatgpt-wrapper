@@ -25,7 +25,8 @@ setup(
     python_requires=">=3.7",
     entry_points={
         "console_scripts": [
-            "chatgpt = chatgpt_wrapper.main:main"
+            "chatgpt = chatgpt_wrapper.main:main",
+            "clh = extensions.cl_helper.main:main"
         ]
     },
     scripts=["postinstall.sh"],
