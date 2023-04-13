@@ -1,18 +1,22 @@
 FROM accetto/ubuntu-vnc-xfce-python-g3:vscode-firefox
-COPY . /src
-WORKDIR /src
 
 USER root
 
-# Pkgs for building `readline`
-RUN apt-get update && apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl procps python3-dev
+# Pkgs for default database
+RUN apt-get update && apt-get install -y sqlite3
 
 # Fonts
 RUN apt-get -y -qq install fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming fonts-emojione
 
-# Install wrapper
-RUN pip install -r requirements.txt
-RUN python setup.py install
+COPY requirements.txt /tmp/requirements.txt
 
-# Install browser
-RUN python -m playwright install firefox
+RUN pip install langchain
+RUN pip install -r /tmp/requirements.txt
+
+COPY . /src
+WORKDIR /src
+
+# Install wrapper
+RUN pip install -e .
+
+ENV PYTHONPATH=/src:$PYTHONPATH

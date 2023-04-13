@@ -1,4 +1,16 @@
+email-validator
+Flask
+Jinja2
+langchain>=0.0.123
+names
+openai>=0.27.2
+openpyxl
 playwright
-readline; platform_system=="Linux"
-pyreadline3; platform_system=="Windows"
+prompt-toolkit
+pydantic-computed
+pyperclip
+python-frontmatter
+PyYAML
 rich
+sqlalchemy
+tiktoken
